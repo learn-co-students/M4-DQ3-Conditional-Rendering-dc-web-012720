@@ -4,6 +4,32 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  constructor() {
+    super()
+    this.state = {
+      clickValue: "Profile"
+
+    }
+  }
+
+  showComponent = () => {
+    if (this.state.clickValue === "Profile") {
+      return <Profile/>
+    } else if (this.state.clickValue === "Photo") {
+      return <Photos/>
+    } else if (this.state.clickValue === "Cocktail") {
+      return <Cocktails/>
+    } else if (this.state.clickValue === "Pokemon") {
+      return <Pokemon/>
+    }
+  }
+
+  filterMenu = (event) => {
+    this.setState({
+      clickValue: event.target.id
+    })
+
+  }
 
   render() {
 
@@ -17,8 +43,8 @@ class MainBox extends React.Component {
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar filterMenu = {this.filterMenu}/>
+        {this.showComponent()}
       </div>
     )
   }
